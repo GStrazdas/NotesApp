@@ -1,7 +1,24 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using NotesApp.Areas.Identity.Data;
+using NotesApp.Repositories;
+using NotesApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("DatabaseContextConnection") ?? throw new InvalidOperationException("Connection string 'DatabaseContextConnection' not found.");
+
+builder.Services.AddDbContext<DatabaseContext>(options =>
+    options.UseSqlServer(connectionString));;
+
+builder.Services.AddDefaultIdentity<NotesAppUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<DatabaseContext>();;
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddTransient<NotesRepository>();
+builder.Services.AddTransient<UserService>();
+builder.Services.AddTransient<CategoriesRepository>();
+builder.Services.AddTransient<NotesAppUserRepository>();
 
 var app = builder.Build();
 
@@ -17,6 +34,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
