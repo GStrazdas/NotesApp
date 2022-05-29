@@ -8,3 +8,29 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<br />
+
+
+    <table>
+        <tr>
+            <th>
+                <h1>Title</h1>
+            </th>
+            <th>
+                <h1>Content</h1>
+            </th>
+        </tr>
+        @foreach(var note in Model.Notes)
+        {
+            <tr>
+                <td>
+                    @note.Title
+                </td>
+                <td>
+                    @note.Content
+                </td>
+            </tr>
+        }
+    </table>
+
