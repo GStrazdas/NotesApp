@@ -13,11 +13,10 @@ namespace NotesApp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly NotesRepository _repository;
-        private readonly UserService _userService;
         private readonly NotesAppUserRepository _userRepository;
-
-        public List<Note> Notes { get; set; }
-        public List<Note> UserNotes { get; set; }
+        private readonly UserService _userService;
+        
+        public List<Note> Notes { get; set; } = new List<Note>();
 
         public IndexModel(ILogger<IndexModel> logger,
             NotesRepository repository,
@@ -32,9 +31,8 @@ namespace NotesApp.Pages
 
         public void OnGet()
         {
-            var usr = _userService.GetUserId();
-            //Notes = _repository.GetNotes();
-            Notes = _repository.GetNotes().Where(n=>n.NotesAppUserId == usr).ToList();
+            var userId = _userService.GetUserID();
+            Notes = _repository.GetNotes().Where(n => n.NotesAppUserId == userId).ToList();
             //UserNotes = _userRepository.GetUsersNotes(usr).ToList();
         }
     }

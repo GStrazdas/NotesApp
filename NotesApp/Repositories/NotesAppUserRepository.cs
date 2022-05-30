@@ -12,12 +12,23 @@ namespace NotesApp.Repositories
             _context = context;
         }
 
-        public List<Note> GetUsersNotes(string userId)
+        public string GetUserIdByName(string userName)
+        {
+            var user = _context.Users.FirstOrDefault(x => x.UserName == userName);
+            if(user == null)
+            {
+                throw new ArgumentNullException(nameof(userName));
+            }
+            return user.Id;
+        }
+
+        public List<Note> GetUsersNotesById(string userId)
         {
             try
             {
                 var usr = _context.NotesAppUsers.FirstOrDefault(u => u.Id == userId);
-                return usr.Notes.ToList();
+                var notes = usr.Notes;
+                return notes;
             }
             catch
             {
@@ -37,5 +48,6 @@ namespace NotesApp.Repositories
                 return new List<Category>();
             }
         }
+
     }
 }

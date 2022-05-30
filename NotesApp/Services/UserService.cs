@@ -1,18 +1,37 @@
-﻿using System.Security.Claims;
+﻿using NotesApp.Areas.Identity.Data;
+using NotesApp.Model;
+using NotesApp.Repositories;
+using System.Security.Claims;
 
 namespace NotesApp.Services
 {
     public class UserService
     {
         private readonly IHttpContextAccessor _contextAccessor;
+        private readonly NotesAppUserRepository _userRepository;
 
-        public UserService(IHttpContextAccessor contextAccessor)
+        public UserService(IHttpContextAccessor contextAccessor, NotesAppUserRepository userRepository)
         {
             _contextAccessor = contextAccessor;
+            _userRepository = userRepository;
         }
-        public string GetUserId()
+        public string GetUserName()
         {
-            return _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userName = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            return userName;
+        }
+
+        public string GetUserID()
+        {
+            var userId = _userRepository.GetUserIdByName(GetUserName());
+            return userId;
+        }
+
+        public List<Note> GetUserNotes()
+        {
+            var userId = GetUserID();
+            var notes = _userRepository.GetUsersNotesById(userId);
+            return notes;
         }
     }
 }
