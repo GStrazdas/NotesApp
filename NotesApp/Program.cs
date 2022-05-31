@@ -20,6 +20,7 @@ builder.Services.AddTransient<UserService>();
 builder.Services.AddTransient<CategoryService>();
 builder.Services.AddTransient<CategoriesRepository>();
 builder.Services.AddTransient<NotesAppUserRepository>();
+builder.Services.AddTransient<NoteService>();
 
 var app = builder.Build();
 

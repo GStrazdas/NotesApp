@@ -10,11 +10,12 @@
     <div class=" row">
         <div class="col-sm-10 col-md-6 col-lg-4 mb-4">
                 <div class="p-5 bg-secondary text-light rounded-3">
-                    <from method="post">
-                        <h5><input class="form-control"></input></h5>
-                        <p><input class="form-control"> </input></p>
-                        <button class="btn btn-success btn-sm">Add new note</button>
-                    </from>
+                    <form method="post">
+                        <h5><input asp-for="Note.Title" class="form-control"></input></h5>
+                        <p><input asp-for="Note.Content" class="form-control"></input></p>
+                        <div hidden><input asp-for="Note.NotesAppUserId" class="form-control"></div>
+                        <button type="submit" class="btn btn-success btn-sm">Add new note</button>
+                    </form>
                 </div>
             </div>
         @foreach(var note in Model.Notes)
@@ -23,7 +24,8 @@
                 <div id=@note.Id class="p-5 bg-secondary text-light rounded-3 shadow-lg">
                     <h5>@note.Title</h5>
                     <p>@note.Content</p>
-                    <div>
+                    <div hidden>@note.NotesAppUserId</div>
+                    <div class="mt-5">
                         <button class="btn btn-success btn-sm">Edit</button>
                         <button class="btn btn-danger btn-sm">Delete</button>
                     </div>

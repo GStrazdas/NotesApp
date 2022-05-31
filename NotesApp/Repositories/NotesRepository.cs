@@ -29,7 +29,7 @@ namespace NotesApp.Repositories
 
         public Note GetNoteById(int id) => _context.Notes.FirstOrDefault(n => n.Id == id);
 
-        public void Createnote(Note note)
+        public void CreateNote(Note note)
         {
             if(note == null)
             {
