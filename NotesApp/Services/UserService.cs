@@ -26,12 +26,5 @@ namespace NotesApp.Services
             var userId = _userRepository.GetUserIdByName(GetUserName());
             return userId;
         }
-
-        public List<Note> GetUserNotes()
-        {
-            var userId = GetUserID();
-            var notes = _userRepository.GetUsersNotesById(userId);
-            return notes;
-        }
     }
 }

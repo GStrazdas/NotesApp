@@ -5,5 +5,6 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public List<Note> Note { get; set; } = new List<Note>();
+        public string NotesAppUserId { get; set; }
     }
 }
