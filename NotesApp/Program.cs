@@ -17,6 +17,7 @@ builder.Services.AddDefaultIdentity<NotesAppUser>(options => options.SignIn.Requ
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<NotesRepository>();
 builder.Services.AddTransient<UserService>();
+builder.Services.AddTransient<CategoryService>();
 builder.Services.AddTransient<CategoriesRepository>();
 builder.Services.AddTransient<NotesAppUserRepository>();
 

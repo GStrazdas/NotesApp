@@ -6,6 +6,6 @@
         public string Title { get; set; }
         public string? Content { get; set; }
         public int? CategoryId { get; set; }
-        public string NotesAppUserId { get; set; }  //  pagalvoti ar reikia
+        public string NotesAppUserId { get; set; }
     }
 }

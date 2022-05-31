@@ -1,0 +1,47 @@
+﻿@page
+@model NotesApp.Pages.Categories.IndexModel
+@{
+}
+
+<br/>
+
+<div class="container row">
+    <div class="col-10">
+        <h2>Categories List</h2>
+    </div>
+    <div class="col-2">
+        <a asp-page="Create" class="btn btn-info">Create category</a>
+
+    </div>
+    <div class="col-12 border p-2 mt-2">
+        <form method="post">
+            @if (Model.Categories.Count() > 0)
+            {
+                <table class="table table-striped border-1">
+                    <tr class="table-secondary">
+                        <th>
+                            <label asp-for="Categories.FirstOrDefault().Name"></label>
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach(var category in Model.Categories)
+                    {
+                        <tr>
+                            <td>
+                                @category.Name
+                            </td>
+                            <td>
+                                <button asp-page-handler="Delete" asp-route-id="@category.Id" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete</button>
+                                <a asp-page="Edit" asp-route-id="@category.Id" class="btn btn-success btn-sm">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>Libraty is empty...</p>
+            }
+        </form>
+    </div>
+</div>

@@ -21,33 +21,5 @@ namespace NotesApp.Repositories
             }
             return user.Id;
         }
-
-        public List<Note> GetUsersNotesById(string userId)
-        {
-            try
-            {
-                var usr = _context.NotesAppUsers.FirstOrDefault(u => u.Id == userId);
-                var notes = usr.Notes;
-                return notes;
-            }
-            catch
-            {
-                return new List<Note>();
-            }
-        }
-
-        public List<Category> GetUsersCategories(string userId)
-        {
-            try
-            {
-                var usr = _context.NotesAppUsers.FirstOrDefault(u => u.Id == userId);
-                return usr.Categories.ToList();
-            }
-            catch
-            {
-                return new List<Category>();
-            }
-        }
-
     }
 }
